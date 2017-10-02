@@ -1,5 +1,6 @@
 var assert = chai.assert;
 
+// replace v variable assignment with correct validator object reference as needed
 var v = validator;
 
 describe('Validation functions', function() {
@@ -34,11 +35,11 @@ describe('Validation functions', function() {
 
   describe('isPhoneNumber', function() {
     it('UK phone 11 digit', function() {
-      assert.equal(v.isPhoneNumber(02025467889), true, '11-digit phone number - UK');
+      assert.equal(v.isPhoneNumber('02025467889'), true, '11-digit phone number - UK');
     });
 
     it('USA phone 10 digit', function() {
-      assert.equal(v.isPhoneNumber(12549683215), true, '10-digit phone number - US');
+      assert.equal(v.isPhoneNumber('12549683215'), true, '10-digit phone number - US');
     });
   });
 
@@ -546,9 +547,59 @@ describe('Validation functions', function() {
   ===========================================================*/
 
   describe('isRGB', function() {
-    it('should validate an email', function() {
-      assert.equal(a, b, 'test');
+    it('should return false if missing any of the required characters: rgv(0,0,0)', function() {
+      assert.equal(v.isRGB("rgv(0,0,0)"), false);
     });
+
+    it('should return false if missing any of the required characters: rgb(0,0,0', function() {
+      assert.equal(v.isRGB("rgb(0,0,0"), false);
+    });
+
+    it('should return false if missing any of the required values: rgb(0,0)', function() {
+      assert.equal(v.isRGB("rgb(0,0"), false);
+    });
+
+    it('should return true for rgb(0,0,0)', function() {
+      assert.equal(v.isRGB("rgb(0,0,0)"), true);
+    });
+
+    it('should return true for valid input with leading whitespace: rgb(0, 0, 0)', function() {
+      assert.equal(v.isRGB("rgb(0, 0, 0)"), true);
+    });
+
+    it('should return true for input within valid range: rgb(255, 255, 112)', function() {
+      assert.equal(v.isRGB("rgb(255, 255, 112)"), true);
+    });
+
+    it('should return false for input specifying rgba format: rgba(0,0,0, 0)', function() {
+      assert.equal(v.isRGB("rgba(0,0,0, 0)"), false);
+    });
+
+    it('should return false for input outside of valid range: rgb(0,300,0)', function() {
+      assert.equal(v.isRGB("rgb(0,300,0)"), false);
+    });
+
+    it('should return false for input outside of valid range: rgb(0,-14,0)', function() {
+      assert.equal(v.isRGB("rgb(0,-14,0)"), false);
+    });
+
+    it('should return false for input with fractional values: rgb(255, 0, 153.0)', function() {
+      assert.equal(v.isRGB("rgb(255, 0, 153.0)"), false);
+    });
+
+    // optional robustness tests
+    it('should return true for input with percentage values: rgb(100%, 0%, 60%)', function() {
+      assert.equal(v.isRGB("rgb(100%, 0%, 60%)"), true);
+    });
+
+    it('should return false for input with mixed  values: rgb(100%, 0, 60%)', function() {
+      assert.equal(v.isRGB("rgb(100%, 0, 60%)"), false);
+    });
+
+    it('should return true for input with no commas separating values: rgb(255 0 153)', function() {
+      assert.equal(v.isRGB("rgb(255 0 153)"), true);
+    });
+
   });
 
   /*===========================================================
@@ -562,8 +613,53 @@ describe('Validation functions', function() {
   ===========================================================*/
 
   describe('isHSL', function() {
-    it('should validate an email', function() {
-      assert.equal(a, b, 'test');
+    it('should return true for a valid hsl format with floating point numbers: hsl(270, 0.6, 0.7)', function() {
+      assert.equal(v.isHSL("hsl(270, 0.6, 0.7)"), true);
+    });
+
+    it('should return true for a valid hsl format with percentages: hsl(270,60%,70%)', function() {
+      assert.equal(v.isHSL("hsl(270,60%,70%)"), true);
+    });
+
+    it('should return false for input with missing required chars: hl(270, 0.6, 0.7)', function() {
+      assert.equal(v.isHSL("hl(270, 0.6, 0.7)"), false);
+    });
+
+    it('should return false for input with incorrect required chars: hxl(270, 0.6, 0.7)', function() {
+      assert.equal(v.isHSL("hxl(270, 0.6, 0.7)"), false);
+    });
+
+    it('should return false for input with missing required chars: hsl270, 0.6, 0.7)', function() {
+      assert.equal(v.isHSL("hxl(270, 0.6, 0.7)"), false);
+    });
+
+    it('should return false for input that is missing required values: hsl(270, 0.6)', function() {
+      assert.equal(v.isHSL("hsl(270, 0.6)"), false);
+    });
+
+    it('should return false for a out of range input: hsl(400,0,1)', function() {
+      assert.equal(v.isHSL("hsl(400,0,1)"), false);
+    });
+
+    it('should return false for a out of range input: hsl(200,3,5)', function() {
+      assert.equal(v.isHSL("hsl(200,3,5)"), false);
+    });
+
+    it('should return false for a out of range input: hsl(-135,0,5)', function() {
+      assert.equal(v.isHSL("hsl(-135,0,5)"), false);
+    });
+
+    // optional robustness tests
+    it('should return true for a valid hsl format with degs: hsl(270deg, 60%, 70%)', function() {
+      assert.equal(v.isHSL("hsl(270deg, 60%, 70%)"), true);
+    });
+
+    it('should return true for a valid hsl format with rads: hsl(4.71239rad, 0.6, 0.7)', function() {
+      assert.equal(v.isHSL("hsl(4.71239rad, 60%, 70%)"), true);
+    });
+
+    it('should return true for a valid hsl format with turn: hsl(.75turn, 60%, 70%)', function() {
+      assert.equal(v.isHSL("hsl(.75turn, 60%, 70%)"), true);
     });
   });
 
@@ -573,8 +669,36 @@ describe('Validation functions', function() {
   =========================================================== */
 
   describe('isColor', function() {
-    it('should validate an email', function() {
-      assert.equal(a, b, 'test');
+    it('should return true for valid hex: #ccccff', function() {
+      assert.equal(v.isColor("#ccccff"), true);
+    });
+
+    it('should return true for valid hex: #363', function() {
+      assert.equal(v.isColor("#363"), true);
+    });
+
+    it('should return false for invalid hex: #ccccxf', function() {
+      assert.equal(v.isColor("#ccccxf"), false);
+    });
+
+    it('should return false for invalid hex: abc345', function() {
+      assert.equal(v.isColor("abc345"), false);
+    });
+
+    it('should return true for valid rgb: rgb(255,255,200)', function() {
+      assert.equal(v.isColor("rgb(255,255,200)"), true);
+    });
+
+    it('should return false for invalid hex: rgb(275,255,200)', function() {
+      assert.equal(v.isColor("rgb(275,255,200)"), false);
+    });
+
+    it('should return true for valid hsl: hsl(46,0.66,0.21)', function() {
+      assert.equal(v.isColor("hsl(46,0.66,0.21)"), true);
+    });
+
+    it('should return false for invalid hsl: hsl(255,255,255)', function() {
+      assert.equal(v.isColor("hsl(255,255,255)"), false);
     });
   });
 
