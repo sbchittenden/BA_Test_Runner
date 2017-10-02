@@ -10,12 +10,21 @@ describe('Utilities functions', function() {
   Write a function that operates similarly to .forEach. Your function should iterate and call the callback parameter for each element or property of a list at the interval specified by the n parameter. It should not call callback on values greater than the list’s number of elements.
   */
   describe('.by', function() {
+
     var log = function(val, index, list) {
-      console.log(val);
+      resultArray.push(val);
     };
 
-    utilities.by([1, 2, 3, 4, 5, 6], 2, log); // will output: 2, 4, 6
-    
+    var test1 = function() {
+    var resultArray = [];
+    u.by([1, 2, 3, 4, 5, 6], 2, log);
+    return resultArray;
+    }
+
+    it('should execute callback on a list at n interval', function(){
+      assert.equal(u.by([1, 2, 3, 4, 5, 6], 2, log), [2,4,6]);
+    });
+
   });
 
   /*

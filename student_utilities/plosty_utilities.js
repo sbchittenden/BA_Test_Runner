@@ -22,9 +22,9 @@ utilities.by = function(list, n, callback) {
   }
 };
 
-var log = function(val, index, list) {
-  console.log(val);
-};
+// var log = function(val, index, list) {
+//   console.log(val);
+// };
 
 // utilities.by([1,2,3,4,5,6], 2, log); // will output: 2, 4, 6
 
