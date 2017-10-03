@@ -142,7 +142,7 @@ validator.contains = function(input, words){
       inputArr[i] = " ";
     }
   var inputArr = inputArr.join('');
-  var inputArr = inputArr.split(' '); 
+  var inputArr = inputArr.split(' ');
   for(var i=0; i < inputArr.length; i++){
     if(inputArr[i] == "")
        inputArr.splice(i, 1);
@@ -161,7 +161,7 @@ validator.lacks = function(input, words){
       inputArr[i] = " ";
     }
   var inputArr = inputArr.join('');
-  var inputArr = inputArr.split(' '); 
+  var inputArr = inputArr.split(' ');
   for(var i=0; i < inputArr.length; i++){
     if(inputArr[i] == "")
        inputArr.splice(i, 1);
@@ -175,7 +175,7 @@ validator.lacks = function(input, words){
 
 validator.isComposedOf = function(input, strings) {
   var input = input.split(" ").join("").toLowerCase();
-  input = utilities.withoutSymbols(input); 
+  input = utilities.withoutSymbols(input);
   var check = [];
   for (var i = 0; i < input.length; i++) {
     check[i] = false;
@@ -192,7 +192,7 @@ validator.isComposedOf = function(input, strings) {
         search(position + 1);
       }
     } search(0);
-  } 
+  }
   for (var i = 0; i < check.length; i++) {
     if (check[i] === false) {
       return false
@@ -238,7 +238,7 @@ validator.isAlphanumeric = function(input){
     var input = input.toLowerCase();
     var letsAndNums = "abcdefghijklmnopqrstuvwxyz1234567890";
     for(i=0; i < input.length; i ++){
-        for(k = 0; k < letsAndNums.length; k++){ 
+        for(k = 0; k < letsAndNums.length; k++){
             if(letsAndNums.indexOf(input.charAt(i)) == -1) return false;
     }
     }
@@ -250,7 +250,7 @@ validator.isCreditCard = function(input){
     var input = input.toLowerCase();
     var letsAndNums = "abcdefghijklmnopqrstuvwxyz1234567890-";
     for(i=0; i < input.length; i ++){
-        for(k = 0; k < letsAndNums.length; k++){ 
+        for(k = 0; k < letsAndNums.length; k++){
             if(letsAndNums.indexOf(input.charAt(i)) == -1) return false;
     }
     }
@@ -288,10 +288,10 @@ validator.isRGB = function (input){
     }
   //verify the start and the ending of input is correct
   for(i=0; i < input.length; i++){
-        if(input.charAt(0) !== "r" 
-          || input.charAt(1) !== "g" 
-          || input.charAt(2) !== "b" 
-          || input.charAt(3) !== "(" 
+        if(input.charAt(0) !== "r"
+          || input.charAt(1) !== "g"
+          || input.charAt(2) !== "b"
+          || input.charAt(3) !== "("
           || input.charAt(input.length-1) !== ")") return false;
     }
   //obtain what is inside the parenthesis
@@ -314,13 +314,13 @@ return true;
 validator.isHSL = function(input){
   //make input lowercase
     var input = input.toLowerCase();
-    
+
   //verify the start and the ending of input is correct
   for(i=0; i < input.length; i++){
-        if(input.charAt(0) !== "h" 
-          || input.charAt(1) !== "s" 
-          || input.charAt(2) !== "l" 
-          || input.charAt(3) !== "(" 
+        if(input.charAt(0) !== "h"
+          || input.charAt(1) !== "s"
+          || input.charAt(2) !== "l"
+          || input.charAt(3) !== "("
           || input.charAt(input.length-1) !== ")") return false;
     }
   //obtain what is inside the parenthesis
@@ -337,8 +337,8 @@ validator.isHSL = function(input){
     for(i=0; i < numsArr.length; i++){
       if(Number.isInteger(numsArr[i]) === false) return false;
       if(numsArr[0] < 0 || numsArr[0] > 360) return false;
-      if(numsArr[1] < 0 || numsArr [1] > 1) return false; 
-      if(numsArr[2] < 0 || numsArr [2] > 1) return false; 
+      if(numsArr[1] < 0 || numsArr [1] > 1) return false;
+      if(numsArr[2] < 0 || numsArr [2] > 1) return false;
     }
     return true;
 };

@@ -661,7 +661,7 @@ describe('Validation functions', function() {
       assert.isTrue(v.isRGB("rgb(100%, 0%, 60%)"));
     });
 
-    it('should return false for input with mixed  values: rgb(100%, 0, 60%)', function() {
+    it('should return false for input with mixed  values: rgb(100%, 8, 60%)', function() {
       assert.isFalse(v.isRGB("rgb(100%, 8, 60%)"));
     });
 
