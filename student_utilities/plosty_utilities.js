@@ -32,8 +32,8 @@ utilities.by = function(list, n, callback) {
 /*
 * .keys(object)
 *
-* Write a function that will create an array of all the keys of an object. 
-* Remember that a key is the name of an objects property. 
+* Write a function that will create an array of all the keys of an object.
+* Remember that a key is the name of an objects property.
 */
 
 utilities.keys = function(object) {
@@ -51,7 +51,7 @@ utilities.keys = function(object) {
 /*
 * .pairs(object)
 *
-* Write a function that will create an array of all the keys and values of an object in the order of [key, value, key, value] 
+* Write a function that will create an array of all the keys and values of an object in the order of [key, value, key, value]
 * for as many key/value pairs as exist in the object.
 */
 
@@ -74,41 +74,41 @@ utilities.pairs = function(object) {
 * Write a function that returns a randomly re-arranged copy of the elements in its parameter array.
 */
 utilities.shuffle = function(array) {
-  // set up results - shallow copy array into results array 
-  var result = array.splice(0);  
+  // set up results - shallow copy array into results array
+  var result = array.splice(0);
   // decide how many times to shuffle the array (arbitrary number)
   var shuffleTimes = result.length+10;
-  
+
   for (i=0; i<shuffleTimes; i++) {
     // calculate which element we want to remove, and store that element in a temporary variable
     var removeLocation = Math.floor(Math.random()*result.length);
     var tempItem = result[removeLocation];
     // remove the item from the array
     result.splice(removeLocation, 1);
-    
+
     // decide where the element will be reinserted into the array
     var insertionLocation  = Math.floor(Math.random()*result.length);
     // add the result back in to the results array
     result.splice(insertionLocation, 0, tempItem);
   }
-  
-  return result;  
+
+  return result;
 };
 
 
 /*
-* .pluralize(n, word, pluralWord) 
+* .pluralize(n, word, pluralWord)
 *
-* Write a function that will return the plural of a word depending on the value of the n parameter. 
-* If n is 1, return the non-plural word (parameter word); otherwise, add an s to the plural word. 
+* Write a function that will return the plural of a word depending on the value of the n parameter.
+* If n is 1, return the non-plural word (parameter word); otherwise, add an s to the plural word.
 * If the pluralWord parameter is provided, instead of adding an s, return the pluralWord.
 */
 
 utilities.pluralize = function(n, word, pluralWord) {
-  if (n===1) 
+  if (n===1)
     return word;
   else {
-    if (pluralWord) 
+    if (pluralWord)
       return pluralWord;
     else
       return word + 's';
@@ -118,9 +118,9 @@ utilities.pluralize = function(n, word, pluralWord) {
 
 /*
 * .toDash(str)
-* 
-* Write a function for converting a camelCase string to a dashed string. 
-* Camel case presents words with no spaces separating them and with each words first letter capitalized 
+*
+* Write a function for converting a camelCase string to a dashed string.
+* Camel case presents words with no spaces separating them and with each words first letter capitalized
 * except the first word, which is lower case.
 * Examples: hotDog, spaceStationComplex, myFirstFunction.
 *
@@ -134,13 +134,13 @@ utilities.toDash = function(str) {
   // cycle through the characters in the input string
   for (var c in str) {
     // if character is uppercase, insert a dash first to the result string, plus the lowercase character
-    if (str[c] === 'A' || str[c] === 'B' || str[c] === 'C' || str[c] === 'D' || str[c] === 'E' || str[c] === 'F' || str[c] === 'G' 
+    if (str[c] === 'A' || str[c] === 'B' || str[c] === 'C' || str[c] === 'D' || str[c] === 'E' || str[c] === 'F' || str[c] === 'G'
         || str[c] === 'H' || str[c] === 'I' || str[c] === 'J' || str[c] === 'K' || str[c] === 'L' || str[c] === 'M' || str[c] === 'N'
-        || str[c] === 'O' || str[c] === 'P' || str[c] === 'Q' || str[c] === 'R' || str[c] === 'S' || str[c] === 'T' || str[c] === 'U' 
+        || str[c] === 'O' || str[c] === 'P' || str[c] === 'Q' || str[c] === 'R' || str[c] === 'S' || str[c] === 'T' || str[c] === 'U'
         || str[c] === 'V' || str[c] === 'W' || str[c] === 'X' || str[c] === 'Y' || str[c] === 'Z')
       result += ('-' + str[c].toLowerCase());
     // add the character to the result string
-    else 
+    else
       result += str[c];
   }
 
@@ -154,7 +154,7 @@ utilities.toDash = function(str) {
 * Write a function for converting a dashed string to a camelCase string
 */
 
-utilities.toCamelCase = function(str) {
+utilities.toCamel = function(str) {
   var result = "";
 
   // cycle through the characters in the input string
@@ -177,7 +177,7 @@ utilities.toCamelCase = function(str) {
 /*
 * .has(obj, search)
 *
-* Write a function that searches all values of the parameter obj and returns true if any are equal to the search parameter. 
+* Write a function that searches all values of the parameter obj and returns true if any are equal to the search parameter.
 * Otherwise has should return false.
 */
 
