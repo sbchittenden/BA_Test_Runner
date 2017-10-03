@@ -1,4 +1,4 @@
-# Unit tests for Bov Academy validator and utility functions
+# Unit tests for Bov Academy `validator` and `utilities` functions
 
 A simple way to quickly assess how complete and robust each student's project assignment is. The majority of the unit tests are taken directly from the project assignment directions.
 
