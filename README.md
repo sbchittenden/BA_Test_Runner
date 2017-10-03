@@ -6,7 +6,7 @@ As long as the student has followed the function names as laid out in the direct
 
 ## Use
 
-1. Clone this repo to your local machine
+1. Clone this repo.
 
 2. Install the Mocha.js test framework and Chai.js assertion libraries:
 
