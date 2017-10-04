@@ -24,7 +24,7 @@ validator.isPhoneNumber = function(input){
 };
 
 validator.isDate = function(input){
-    if (input !== "string") throw "please enter a valid date string."
+    if (typeof input !== "string") throw "please enter a valid date string."
     if(Date.parse(input)) return true;
     return false;
 };

@@ -27,7 +27,7 @@ describe('Validation functions', function() {
     });
 
     it('should return false for an email with no string before the @ symbol', function() {
-      assert.isFalse(v.isEmailAddress('@fake.com'), 'an email with no @ symbol should not validate');
+      assert.isFalse(v.isEmailAddress('@fake.com'), 'an email with no string before the @ symbol should not validate');
     });
   });
 
