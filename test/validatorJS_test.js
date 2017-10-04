@@ -41,7 +41,7 @@ describe('Validation functions', function() {
       assert.isFunction(v.isPhoneNumber, 'missing .isPhoneNumber method on validator object');
     });
     it('UK phone 11 digit', function() {
-      assert.equal(v.isPhoneNumber('02025467889'), true, '11-digit phone number - UK');
+      assert.equal(v.isPhoneNumber('020 2546 7889'), true, '11-digit phone number - UK');
     });
 
     it('USA phone 10 digit', function() {
@@ -97,7 +97,7 @@ describe('Validation functions', function() {
     });
 
     it('should accept Date objects and should return false if the input date is after the reference date', function() {
-      assert.isTrue(v.isBeforeDate(dec25, oct31));
+      assert.isFalse(v.isBeforeDate(dec25, oct31));
     });
   });
 
@@ -230,11 +230,11 @@ describe('Validation functions', function() {
       assert.isFalse(v.isEmpty(undefined));
     });
 
-    it('should return false if the input is a boolean', function() {
+    it('should return false if the input is a boolean true', function() {
       assert.isFalse(v.isEmpty(true));
     });
 
-    it('should return false if the input is a boolean', function() {
+    it('should return false if the input is a boolean false', function() {
       assert.isFalse(v.isEmpty(false));
     });
   });
@@ -250,7 +250,7 @@ describe('Validation functions', function() {
     });
 
     it('should return true for trimmed input', function() {
-      assert.isTrimmed(v.isTrimmed("harmony and irony"));
+      assert.isTrue(v.isTrimmed("harmony and irony"));
     });
 
     it('should return false for leading whitespace', function() {
@@ -652,8 +652,8 @@ describe('Validation functions', function() {
       assert.isFalse(v.isRGB("rgb(0,-14,0)"));
     });
 
-    it('should return false for input with fractional values: rgb(255, 0, 153.0)', function() {
-      assert.isFalse(v.isRGB("rgb(255, 0, 153.0)"));
+    it('should return false for input with fractional values: rgb(255, 0, 153.5)', function() {
+      assert.isFalse(v.isRGB("rgb(255, 0, 153.5)"));
     });
 
     // optional robustness tests
