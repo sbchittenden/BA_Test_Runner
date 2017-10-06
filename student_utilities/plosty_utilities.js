@@ -1,6 +1,3 @@
-// JavaScript Utility Functions
-
-// function(window) {
 var utilities = {};
 
 utilities.isArray = Array.isArray || function(arr) {
@@ -22,11 +19,7 @@ utilities.by = function(list, n, callback) {
   }
 };
 
-// var log = function(val, index, list) {
-//   console.log(val);
-// };
 
-// utilities.by([1,2,3,4,5,6], 2, log); // will output: 2, 4, 6
 
 
 /*
@@ -47,6 +40,24 @@ utilities.keys = function(object) {
   return result;
 };
 
+/*
+* .values(object)
+* Write a function that will create an array of all the values of an object.
+* Remember that a value is the stored data at a specific key of an object.
+*/
+
+utilities.values = function(object) {
+  // create an empty array for the result
+  result = [];
+  // cycle through each key in the object and push it to the result array
+  for(var i in object) {
+    result.push(object[i]);
+  }
+  // return the result array
+  return result;
+}
+
+
 
 /*
 * .pairs(object)
@@ -66,6 +77,7 @@ utilities.pairs = function(object) {
   // return the result array
   return result;
 };
+
 
 
 /*
@@ -149,6 +161,7 @@ utilities.toDash = function(str) {
 
 
 
+
 /*
 * .toCamel(str)
 * Write a function for converting a dashed string to a camelCase string
@@ -158,20 +171,19 @@ utilities.toCamel = function(str) {
   var result = "";
 
   // cycle through the characters in the input string
-  for (var c in str) {
+  for (var i=0; i<str.length; i++) {
     // if character is a dash, insert move the count on and insert an uppercase character
-    if (str[c] === '-'){
+    if (str[i] === '-'){
       // use this to reference the 'c' in the calling function, ie the loop function.
-      this.c++;
-      result += (str[c].toUpperCase());
+      i++;
+      result += (str[i].toUpperCase());
     }
     // else add the character to the result string
     else
-      result += str[c];
+      result += str[i];
   }
   return result;
 };
-
 
 
 /*
@@ -191,7 +203,6 @@ utilities.has = function(obj, search) {
   // if we reach here, all comparisons failed, so return false
   return false;
 };
-
 
 
 /*
@@ -219,7 +230,6 @@ utilities.pick = function(obj, keys) {
 };
 
 
-
 /*
 * .withoutSymbols(input)
 *
@@ -233,22 +243,20 @@ utilities.withoutSymbols = function(input) {
   var result = "";
 
   // cycle through the letters in the input
-  for (var c in input) {
+  for (var c=0; c<input.length; c++) {
     // convert the test char to lowercase
-    testChar = input.charAt(c).toLowerCase();
+    testChar = input.charAt(c);
     // if the character is alphanumberic, add it to the result string
-    if (testChar === ' ' || testChar === 'a' || testChar === 'b' || testChar === 'c' || testChar === 'd' || testChar === 'e' || testChar === 'f'  || testChar === 'g' || testChar === 'h' || testChar === 'i' || testChar === 'j' || testChar === 'k' || testChar === 'l' || testChar === 'm' || testChar === 'n' || testChar === 'o' || testChar === 'p' || testChar === 'q' || testChar === 'r' || testChar === 's' || testChar === 't' || testChar === 'u' || testChar === 'v' || testChar === 'w' || testChar === 'x' || testChar === 'y' || testChar === 'z' || testChar === '0' || testChar === '1'  || testChar === '2'  || testChar === '3' || testChar === '4' || testChar === '5' || testChar === '6' || testChar === '7' || testChar === '8' || testChar === '9') {
+    if ( (testChar === ' ') || (testChar >= 'a' && testChar <= 'z') || (testChar >= 'A' && testChar <= 'Z') ) {
       result += testChar;
     }
   }
 
   return result;
-};
-
+}
 
 /*
 * .countWords(input)
-
 * Counts the number of words in the input parameter.
 * Refer to the definition of word used in the description of the .contains function above.
 */
@@ -275,6 +283,3 @@ utilities.countWords = function(input) {
 
   return result;
 };
-
-
-// })(window);
